@@ -30,7 +30,7 @@ Si quieres probar este proyecto en tu máquina, sigue estos pasos:
    git clone https://github.com/JohnCordoba2004/card-pokemon.git
 
 2. Entra en la carpeta del proyecto:
-   cd cd card-pokemon 
+   cd card-pokemon 
 
 3. Instala las dependencias:
    npm install
