@@ -41,6 +41,7 @@ Si quieres probar este proyecto en tu máquina, sigue estos pasos:
 5. Abre tu navegador en http://localhost:5173 (o el puerto que indique la terminal).
   
 📸 Captura de Pantalla
+
 <img width="2551" height="1310" alt="image" src="https://github.com/user-attachments/assets/6baba332-6d73-4165-bbf0-00b5880c8f92" />
 
 <img width="1405" height="1131" alt="image" src="https://github.com/user-attachments/assets/3f03bff0-c851-4959-a230-5eb03450b83b" />
