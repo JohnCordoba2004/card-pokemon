@@ -1,0 +1,161 @@
+<!-- <!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokédex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="pokeball" aria-hidden="true"></span>
+        <h1>Pokédex</h1>
+      </div>
+
+      <!-- Buscador: tu TypeScript escucha el evento "submit" de este form -->
+      <form id="search-form" class="search" autocomplete="off">
+        <label for="search-input" class="sr-only">Buscar Pokémon</label>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Nombre o número, ej: pikachu"
+          required
+        />
+        <button type="submit">Buscar</button>
+      </form>
+    </header>
+
+    <main>
+      <!-- Mensajes de carga y error. Tu TypeScript escribe aquí. -->
+      <p id="message" class="message" role="status"></p>
+
+      <!-- data-type cambia el color de toda la carta (fire, water, grass...) -->
+      <article id="card" class="card" data-type="fire">
+        <div class="card-art">
+          <div class="card-glow"></div>
+          <img
+            id="pokemon-img"
+            class="pokemon-img"
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"
+            alt="Imagen del Pokémon"
+          />
+        </div>
+
+        <div class="card-info">
+          <span id="pokemon-type" class="type-badge">Fuego</span>
+          <h2 class="card-name">
+            <span id="pokemon-name">Charizard</span>
+            <span id="pokemon-id" class="card-number">#006</span>
+          </h2>
+        </div>
+
+        <ul class="card-stats">
+          <li>
+            <span class="stat-label">HP</span>
+            <strong id="stat-hp" class="stat-value">78</strong>
+          </li>
+          <li>
+            <span class="stat-label">Ataque</span>
+            <strong id="stat-attack" class="stat-value">84</strong>
+          </li>
+          <li>
+            <span class="stat-label">Velocidad</span>
+            <strong id="stat-speed" class="stat-value">100</strong>
+          </li>
+        </ul>
+
+        <button id="open-modal" class="details-btn" type="button">
+          Ver detalles
+        </button>
+      </article>
+    </main>
+
+    <!-- Modal nativo con <dialog>. Se abre con dialog.showModal() -->
+    <dialog id="modal" class="modal" data-type="fire">
+      <div class="modal-box">
+        <button
+          id="close-modal"
+          class="modal-close"
+          type="button"
+          aria-label="Cerrar"
+        >
+          ✕
+        </button>
+
+        <div class="modal-head">
+          <img id="modal-img" class="modal-img" src="" alt="" />
+          <div>
+            <span id="modal-type" class="type-badge">Fuego</span>
+            <h2 id="modal-name" class="modal-name">Charizard</h2>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-box">
+            <span class="stat-label">Altura</span>
+            <strong id="modal-height">1.7 m</strong>
+          </div>
+          <div class="info-box">
+            <span class="stat-label">Peso</span>
+            <strong id="modal-weight">90.5 kg</strong>
+          </div>
+        </div>
+
+        <h3 class="section-title">Habilidades</h3>
+        <ul id="modal-abilities" class="tags">
+          <li>blaze</li>
+          <li>solar-power</li>
+        </ul>
+
+        <h3 class="section-title">Estadísticas</h3>
+
+        <!-- Tu TypeScript pone el valor en --value (ej: "60%") de cada .bar-fill -->
+        <ul class="stat-list">
+          <li class="stat-row">
+            <span>HP</span>
+            <div class="bar"><div id="bar-hp" class="bar-fill"></div></div>
+            <span id="num-hp" class="stat-num">78</span>
+          </li>
+          <li class="stat-row">
+            <span>Ataque</span>
+            <div class="bar"><div id="bar-attack" class="bar-fill"></div></div>
+            <span id="num-attack" class="stat-num">84</span>
+          </li>
+          <li class="stat-row">
+            <span>Defensa</span>
+            <div class="bar"><div id="bar-defense" class="bar-fill"></div></div>
+            <span id="num-defense" class="stat-num">78</span>
+          </li>
+          <li class="stat-row">
+            <span>Ataque esp.</span>
+            <div class="bar">
+              <div id="bar-sp-attack" class="bar-fill"></div>
+            </div>
+            <span id="num-sp-attack" class="stat-num">109</span>
+          </li>
+          <li class="stat-row">
+            <span>Defensa esp.</span>
+            <div class="bar">
+              <div id="bar-sp-defense" class="bar-fill"></div>
+            </div>
+            <span id="num-sp-defense" class="stat-num">85</span>
+          </li>
+          <li class="stat-row">
+            <span>Velocidad</span>
+            <div class="bar"><div id="bar-speed" class="bar-fill"></div></div>
+            <span id="num-speed" class="stat-num">100</span>
+          </li>
+        </ul>
+      </div>
+    </dialog>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

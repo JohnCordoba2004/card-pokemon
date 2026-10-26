@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokédex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="pokeball" aria-hidden="true"></span>
+        <h1>Pokédex</h1>
+      </div>
+      <form id="search-form" class="search" autocomplete="off">
+        <label for="search-input" class="sr-only">Buscar Pokémon</label>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Nombre o número..."
+          required
+        />
+        <button type="submit">Buscar</button>
+      </form>
+    </header>
+
+    <main>
+      <p id="message" class="message" role="status"></p>
+      <!-- Aquí inyectaremos las cartas -->
+      <div id="card-container" class="card-container"></div>
+    </main>
+
+    <!-- 👇 EL MODAL AHORA ESTÁ VACÍO. TODO SE CREA EN TS 👇 -->
+    <dialog id="modal" class="modal"></dialog>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

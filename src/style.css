@@ -1,0 +1,630 @@
+/* =====================================================
+   1. VARIABLES
+   Cambia los colores aquí y se actualiza todo el sitio.
+   ===================================================== */
+:root {
+  --pokedex-red: #d62828;
+  --pokedex-red-dark: #8f1717;
+  --blue: #2b3a9b;
+  --yellow: #ffcb05;
+  --ink: #15152b;
+  --white: #ffffff;
+
+  /* Color del tipo. Lo cambia el atributo data-type (ver sección 4). */
+  --type-color: #8a8fa8;
+
+  --font-display: "Lilita One", cursive;
+  --font-body: "Nunito", system-ui, sans-serif;
+}
+
+/* =====================================================
+   2. BASE
+   ===================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--white);
+  /* Fondo azul con puntitos, como las pantallas de la Pokédex */
+  background:
+    radial-gradient(rgba(255, 255, 255, 0.12) 2px, transparent 3px) 0 0 / 28px
+      28px,
+    linear-gradient(160deg, #3d4fc4 0%, var(--blue) 55%, #161f5c 100%);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+/* Texto solo para lectores de pantalla (lo usamos en el label del input) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* =====================================================
+   3. TOP BAR: marca y buscador
+   ===================================================== */
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  background: var(--pokedex-red);
+  border-bottom: 6px solid var(--pokedex-red-dark);
+  box-shadow: 0 6px 0 var(--ink);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.02em;
+  text-shadow: 3px 3px 0 var(--ink);
+}
+
+/* Pokébola hecha solo con CSS: mitad roja, mitad blanca y un botón en el centro */
+.pokeball {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 4px solid var(--ink);
+  background: linear-gradient(
+    var(--pokedex-red) 0 45%,
+    var(--ink) 45% 55%,
+    var(--white) 55% 100%
+  );
+}
+
+.pokeball::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 3px solid var(--ink);
+  transform: translate(-50%, -50%);
+}
+
+.search {
+  display: flex;
+  gap: 8px;
+  width: min(100%, 400px);
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 18px;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+}
+
+.search input:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--yellow);
+}
+
+.search button {
+  padding: 0 22px;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform 0.1s ease;
+}
+
+.search button:hover {
+  transform: translateY(-2px);
+}
+
+.search button:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+/* =====================================================
+   4. COLORES POR TIPO
+   Tu TypeScript pone data-type="fire" (u otro tipo) en la carta
+   y en el modal. Con eso cambian el color automáticamente.
+   ===================================================== */
+[data-type="normal"] {
+  --type-color: #a8a878;
+}
+[data-type="fire"] {
+  --type-color: #e8702a;
+}
+[data-type="water"] {
+  --type-color: #4f7cd6;
+}
+[data-type="grass"] {
+  --type-color: #5fae55;
+}
+[data-type="electric"] {
+  --type-color: #e6b800;
+}
+[data-type="ice"] {
+  --type-color: #66c7c0;
+}
+[data-type="fighting"] {
+  --type-color: #b03a2e;
+}
+[data-type="poison"] {
+  --type-color: #934593;
+}
+[data-type="ground"] {
+  --type-color: #c9a64b;
+}
+[data-type="flying"] {
+  --type-color: #7d9be0;
+}
+[data-type="psychic"] {
+  --type-color: #e0558a;
+}
+[data-type="bug"] {
+  --type-color: #8fa425;
+}
+[data-type="rock"] {
+  --type-color: #a88f3a;
+}
+[data-type="ghost"] {
+  --type-color: #5b4a8a;
+}
+[data-type="dragon"] {
+  --type-color: #5a3ed0;
+}
+[data-type="dark"] {
+  --type-color: #4d3f3a;
+}
+[data-type="steel"] {
+  --type-color: #8f97a8;
+}
+[data-type="fairy"] {
+  --type-color: #e27aa0;
+}
+
+/* Etiqueta del tipo, con el mismo color que la carta */
+.type-badge {
+  display: inline-block;
+  padding: 4px 16px;
+  border: 2px solid rgba(0, 0, 0, 0.35);
+  border-radius: 999px;
+  background: var(--type-color);
+  color: var(--white);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* =====================================================
+   5. MENSAJES
+   ===================================================== */
+main {
+  display: grid;
+  place-items: center;
+  gap: 20px;
+  padding: 40px 16px 60px;
+}
+
+.message {
+  min-height: 1.5em;
+  margin: 0;
+  color: var(--yellow);
+  font-weight: 700;
+  text-align: center;
+}
+
+.message.is-error {
+  color: #ffb4b4;
+}
+
+/* =====================================================
+   6. LA CARTA
+   ===================================================== */
+.card {
+  position: relative;
+  width: min(100%, 340px);
+  padding: 14px;
+  overflow: hidden;
+  border: 4px solid var(--yellow);
+  border-radius: 22px;
+  background: linear-gradient(180deg, var(--type-color) 0%, var(--ink) 70%);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  text-align: center;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* Brillo diagonal tipo carta holográfica. Se mueve al pasar el mouse. */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 65%
+  );
+  background-size: 250% 100%;
+  background-position: 150% 0;
+  transition: background-position 0.8s ease;
+}
+
+.card:hover::before {
+  background-position: -50% 0;
+}
+
+/* Mientras busca, la carta se ve apagada */
+.card.is-loading {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+
+.card-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 210px;
+}
+
+/* Resplandor de color detrás de la imagen */
+.card-glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--type-color) 0%, transparent 70%);
+  opacity: 0.7;
+}
+
+.pokemon-img {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.45));
+  transition: transform 0.4s ease;
+}
+
+.card:hover .pokemon-img {
+  transform: translateY(-8px) scale(1.05);
+}
+
+/* Mientras carga, la imagen se mueve de lado a lado */
+.card.is-loading .pokemon-img {
+  animation: wobble 0.6s ease-in-out infinite;
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+.card-info {
+  margin-top: 8px;
+}
+
+.card-name {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px;
+  margin: 12px 0 0;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0 var(--ink);
+}
+
+.card-number {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--yellow);
+}
+
+/* Franja de estadísticas al pie de la carta */
+.card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 18px -14px 0;
+  padding: 12px 0;
+  list-style: none;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.card-stats li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-stats li + li {
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  opacity: 0.75;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--yellow);
+}
+
+.details-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform 0.1s ease;
+}
+
+.details-btn:hover {
+  transform: translateY(-2px);
+}
+
+.details-btn:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+/* =====================================================
+   7. MODAL
+   <dialog> ya trae el manejo de teclado y el fondo oscuro.
+   Solo le damos estilo y una animación de entrada.
+   ===================================================== */
+.modal {
+  width: min(92vw, 520px);
+  max-height: 90vh;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--white);
+}
+
+.modal::backdrop {
+  background: rgba(10, 14, 40, 0.7);
+  backdrop-filter: blur(3px);
+}
+
+.modal[open] {
+  animation: pop-in 0.35s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-box {
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+  border: 4px solid var(--yellow);
+  border-radius: 22px;
+  background: linear-gradient(180deg, var(--type-color) 0%, var(--ink) 60%);
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: var(--pokedex-red);
+  color: var(--white);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-right: 40px;
+}
+
+.modal-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.4));
+}
+
+.modal-name {
+  margin: 8px 0 0;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0 var(--ink);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.info-box {
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.info-box strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.2rem;
+}
+
+.section-title {
+  margin: 24px 0 10px;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--yellow);
+}
+
+/* Habilidades como etiquetas */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Estadísticas con barras */
+.stat-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 40px;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.bar {
+  height: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* El ancho viene de la variable --value que pone TypeScript, ej: "60%" */
+.bar-fill {
+  width: var(--value, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--yellow), #ff9d00);
+  transition: width 0.8s ease;
+}
+
+.stat-num {
+  text-align: right;
+  font-weight: 800;
+}
+
+/* =====================================================
+   8. RESPONSIVE
+   ===================================================== */
+@media (max-width: 600px) {
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .brand {
+    justify-content: center;
+  }
+
+  .stat-row {
+    grid-template-columns: 90px 1fr 34px;
+  }
+}
+
+/* =====================================================
+   9. MOVIMIENTO REDUCIDO
+   Quita animaciones para quien tiene activada esa opción en el sistema.
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  justify-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
