@@ -4,6 +4,8 @@ Una aplicación web moderna y responsiva que consume la [PokéAPI](https://pokea
 
 Este proyecto fue construido desde cero utilizando **TypeScript** para garantizar un código seguro y escalable, manipulando el DOM dinámicamente sin depender de frameworks.
 
+URL proyecto: https://pokedex-johncordoba.vercel.app/
+
 ## ✨ Características Principales
 
 *   **Búsqueda en tiempo real:** Encuentra Pokémon por nombre o número de ID mientras escribes (con validación de longitud mínima).
