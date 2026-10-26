@@ -27,4 +27,4 @@ Si quieres probar este proyecto en tu máquina, sigue estos pasos:
 
 1. Clona este repositorio:
    ```bash
-   git clone https://github.com/[TU_USUARIO]/[NOMBRE_DEL_REPO].git
+   git clone https://github.com/JohnCordoba2004/card-pokemon.git
